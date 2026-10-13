@@ -60,3 +60,4 @@
   from = "/dashboard"
   to = "/dashboard/index.html"
   status = 200
+

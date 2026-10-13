@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>arebHub | Premium E-Commerce</title>
     <!-- Google Fonts for a Premium Look -->
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/style.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
         body { background-color: #f8fafc; color: #0f172a; min-height: 100vh; display: flex; flex-direction: column; }
@@ -42,43 +45,45 @@
     <!-- DYNAMIC CORE CONTENT INJECTION SITE -->
     <div class="content-wrapper">
         
-<div class="container" style="max-width: 400px; margin-top: 3rem;">
-    <div class="card">
-        <div class="card-header">
-            <h2 class="text-center" style="margin: 0;">Welcome Back</h2>
-            <p class="text-center text-muted" style="margin-top: 0.5rem; margin-bottom: 0;">Sign in to your account</p>
+<div style="min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center; padding: 40px 20px;">
+    <div style="background: white; width: 100%; max-width: 440px; border-radius: 20px; box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08); border: 1px solid #e2e8f0; padding: 40px 35px;">
+        <div style="text-align: center; margin-bottom: 28px;">
+            <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: #e0e7ff; border-radius: 50%; font-size: 30px; margin-bottom: 16px;">
+                👋
+            </div>
+            <h2 style="font-size: 28px; font-weight: 800; color: #1e293b; margin: 0 0 8px 0; letter-spacing: -0.5px;">Welcome Back</h2>
+            <p style="color: #64748b; font-size: 15px; margin: 0;">Sign in to your arebHub account</p>
         </div>
         
-        <div class="card-body">
-            <form method="POST" style="padding: 2rem 0;">
-                <input type="hidden" name="csrfmiddlewaretoken" value="AeWxIW9WlYGSChPBIJVIIaiw0j8muwZS01olIjMV3NzAaIO9dpHknZAEKC3CkBYh">
-                
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" id="email" name="email" required placeholder="Enter your email" autofocus>
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" required placeholder="Enter your password">
-                </div>
-                
-                <button type="submit" class="btn btn-primary w-full" style="margin-top: 1.5rem; margin-bottom: 1rem;">
-                    Sign In
-                </button>
-                
-                <div style="text-align: center;">
-                    <p class="text-muted">Don't have an account? 
-                        <a href="/register/" style="color: var(--primary-color); font-weight: 600;">Create one now</a>
-                    </p>
-                </div>
-            </form>
+        <form method="POST">
+            <input type="hidden" name="csrfmiddlewaretoken" value="x3U0hcS4KYATYUP2a9mJk2mRKWcYSFLJbW7XjLnaeHSuRprmUrzaLNk8WB41KIRR">
+            
+            <div style="margin-bottom: 20px;">
+                <label for="email" style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; color: #334155;">Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="Enter your email" autofocus style="width: 100%; padding: 13px 16px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 15px; outline: none; transition: all 0.2s; box-sizing: border-box; background: #fff;" onfocus="this.style.borderColor='#7c3aed'; this.style.boxShadow='0 0 0 3px rgba(124, 58, 237, 0.15)'" onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none'">
+            </div>
+            
+            <div style="margin-bottom: 26px;">
+                <label for="password" style="display: block; font-weight: 600; font-size: 14px; margin-bottom: 8px; color: #334155;">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password" style="width: 100%; padding: 13px 16px; border: 1.5px solid #cbd5e1; border-radius: 10px; font-size: 15px; outline: none; transition: all 0.2s; box-sizing: border-box; background: #fff;" onfocus="this.style.borderColor='#7c3aed'; this.style.boxShadow='0 0 0 3px rgba(124, 58, 237, 0.15)'" onblur="this.style.borderColor='#cbd5e1'; this.style.boxShadow='none'">
+            </div>
+            
+            <button type="submit" style="width: 100%; background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%); color: white; padding: 15px; border: none; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.35); transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                Sign In
+            </button>
+            
+            <div style="text-align: center; margin-top: 22px;">
+                <p style="color: #64748b; font-size: 14px; margin: 0;">Don't have an account? 
+                    <a href="/register/" style="color: #7c3aed; font-weight: 700; text-decoration: none;">Create one now</a>
+                </p>
+            </div>
+        </form>
+
+        <div style="margin-top: 25px; padding: 14px; background: #f8fafc; border-radius: 10px; text-align: center; border: 1px solid #f1f5f9;">
+            <p style="font-size: 13px; color: #64748b; margin: 0; line-height: 1.4;">
+                🔒 Secure SSL encrypted access | Safe shopping
+            </p>
         </div>
-    </div>
-    
-    <!-- Additional info -->
-    <div style="margin-top: 2rem; text-align: center;">
-        <p style="color: var(--text-secondary);">Demo credentials available for testing</p>
     </div>
 </div>
 
