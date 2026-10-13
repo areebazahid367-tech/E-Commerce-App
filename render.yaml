@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: e-commerce-app
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn myproject.wsgi:application"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.0

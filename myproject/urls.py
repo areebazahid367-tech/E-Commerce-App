@@ -31,9 +31,13 @@ urlpatterns = [
         path('dashboard/', views.merchant_dashboard, name='merchant_dashboard'),
 ]
 
-# 🖼️ Media Folder Image Pipeline Routing Connected Here
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+from django.urls import re_path
+from django.views.static import serve
+
+# 🖼️ Media Folder Image Pipeline Routing
+urlpatterns += [
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+]
 
 
 
