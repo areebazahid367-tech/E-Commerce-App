@@ -1,0 +1,62 @@
+[build]
+  command = "python export_static.py"
+  publish = "dist"
+
+[build.environment]
+  PYTHON_VERSION = "3.11"
+
+# Pretty URLs and clean routing for all pages
+[[redirects]]
+  from = "/products"
+  to = "/products/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/cart"
+  to = "/cart/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/checkout"
+  to = "/checkout/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/orders"
+  to = "/orders/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/about"
+  to = "/about/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/contact/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/login"
+  to = "/login/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/register"
+  to = "/register/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/dashboard"
+  to = "/dashboard/index.html"
+  status = 200
