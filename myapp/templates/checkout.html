@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+    <h2 style="font-size: 32px; color: #1e293b; font-weight: 700; margin-bottom: 25px;">📦 Shipping & Payment</h2>
+
+    <!-- 🌟 FIXED: Added method="POST" and action="" tags so your typed data officially saves into the database tables! -->
+    <form method="POST" action="{% url 'checkout' %}" style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 30px;">
+        {% csrf_token %}
+        
+        <!-- 🏠 ADDRESS LOCATION CONTACT INPUTS -->
+        <h3 style="color: #475569; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 20px;">1. Shipping Information</h3>
+        
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Receiver Full Name:</label>
+            <input type="text" name="full_name" placeholder="Areeba Khan" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <div style="margin-bottom: 15px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Full Address Location:</label>
+            <input type="text" name="address" placeholder="Street Address, City, Country" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+        </div>
+        
+        <div style="margin-bottom: 25px;">
+            <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #334155;">Contact Phone Number:</label>
+            <input type="tel" name="phone" placeholder="+92 300 1234567" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+        </div>
+
+        <!-- 💳 PAYMENT TOGGLE SECTION -->
+        <h3 style="color: #475569; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 20px;">2. Select Payment Option</h3>
+        <div style="display: flex; gap: 20px; margin-bottom: 25px;">
+            <label style="flex: 1; background: #f8fafc; border: 2px solid #cbd5e1; padding: 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: bold; color: #334155;">
+                <input type="radio" name="payment_method" value="cod" checked onchange="togglePaymentFields()"> Cash on Delivery (COD)
+            </label>
+            <label style="flex: 1; background: #f8fafc; border: 2px solid #cbd5e1; padding: 15px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 10px; font-weight: bold; color: #334155;">
+                <input type="radio" name="payment_method" value="card" onchange="togglePaymentFields()"> ATM / Credit Card
+            </label>
+        </div>
+
+        <!-- 🎴 HIDDEN ATM CARD FORM FIELDS -->
+        <div id="card_fields_box" style="display: none; background: #f1f5f9; border-radius: 8px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #2563eb;">
+            <h4 style="margin-top: 0; color: #1e293b;">💳 Enter Credit / ATM Card Numbers</h4>
+            <div style="margin-bottom: 15px;">
+                <label style="display: block; font-size: 14px; margin-bottom: 5px; font-weight: 600;">Cardholder Name:</label>
+                <input type="text" placeholder="Areeba Khan" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+            </div>
+            <div style="display: flex; gap: 15px;">
+                <div style="flex: 2;">
+                    <label style="display: block; font-size: 14px; margin-bottom: 5px; font-weight: 600;">16-Digit ATM Card Number:</label>
+                    <input type="text" placeholder="1234 5678 9101 1121" maxlength="19" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+                </div>
+                <div style="flex: 1;">
+                    <label style="display: block; font-size: 14px; margin-bottom: 5px; font-weight: 600;">CVV Code:</label>
+                    <input type="password" placeholder="***" maxlength="3" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; box-sizing: border-box;">
+                </div>
+            </div>
+        </div>
+
+        <!-- 🚀 TYPE="SUBMIT" ACTION BUTTON BUTTON BUTTON -->
+        <button type="submit" style="width: 100%; background: #7c3aed; color: white; padding: 15px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);">
+            Confirm Order Now 🚀
+        </button>
+    </form>
+</div>
+
+<script>
+    function togglePaymentFields() {
+        var selectedMethod = document.querySelector('input[name="payment_method"]:checked').value;
+        var cardBox = document.getElementById('card_fields_box');
+        
+        if (selectedMethod === 'card') {
+            cardBox.style.display = 'block';
+        } else {
+            cardBox.style.display = 'none';
+        }
+    }
+</script>
+{% endblock %}
+
+

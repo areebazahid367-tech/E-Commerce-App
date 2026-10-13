@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 1200px; margin: 0 auto; padding: 40px 20px; font-family: 'Segoe UI', system-ui, sans-serif; background: #f8fafc;">
+    
+    <!-- DASHBOARD HEADER -->
+    <h1 style="color: #1e293b; font-weight: 800; font-size: 34px; margin-bottom: 30px; border-bottom: 3px solid #7c3aed; padding-bottom: 10px;">
+        👑 Store Admin & Merchant Dashboard
+    </h1>
+
+    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; align-items: start;">
+        
+        <!-- 📝 FORM TO ADD PRODUCT DIRECTLY FROM WEBSITE -->
+        <div style="background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 25px; border: 1px solid #e2e8f0;">
+            <h3 style="color: #7c3aed; margin-top: 0; margin-bottom: 20px; font-size: 20px; font-weight: 700;">
+                ➕ Add Product to Catalog
+            </h3>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #475569;">Product Name:</label>
+                    <input type="text" name="product_name" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #475569;">Price ($):</label>
+                    <input type="number" step="0.01" name="product_price" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box;">
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #475569;">Category Section:</label>
+                    <select name="category_id" required style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; background: white; box-sizing: border-box;">
+                        {% for cat in categories %}
+                            <option value="{{ cat.id }}">{{ cat.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                
+                <div style="margin-bottom: 15px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #475569;">Product Photo:</label>
+                    <input type="file" name="product_image" required style="width: 100%; padding: 5px;">
+                </div>
+                
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; margin-bottom: 5px; color: #475569;">Description Summary:</label>
+                    <textarea name="product_description" required rows="3" style="width: 100%; padding: 12px; border: 1px solid #cbd5e1; border-radius: 8px; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+                
+                <button type="submit" style="width: 100%; background: #7c3aed; color: white; padding: 14px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 16px; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.25);">
+                    Publish Product Live 🚀
+                </button>
+            </form>
+        </div>
+
+        <!-- 📦 LIVE ORDERS & CUSTOMER PERSONAL INFO TRACKER -->
+        <div style="background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); padding: 25px; border: 1px solid #e2e8f0; overflow-x: auto;">
+            <h3 style="color: #0f172a; margin-top: 0; margin-bottom: 20px; font-size: 20px; font-weight: 700;">
+                📦 Incoming Client Orders Details
+            </h3>
+            
+            {% if orders %}
+                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #e2e8f0; color: #64748b; font-weight: 600; font-size: 14px;">
+                            <th style="padding: 12px 8px;">Order Details</th>
+                            <th style="padding: 12px 8px;">Customer Contact Info</th>
+                            <th style="padding: 12px 8px;">Total Spent</th>
+                            <th style="padding: 12px 8px;">Logistics Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ord in orders %}
+                            <tr style="border-bottom: 1px solid #f1f5f9; color: #334155; font-size: 14px;">
+                                <td style="padding: 15px 8px; vertical-align: top;">
+                                    <strong style="color:#7c3aed;">#ORD-00{{ ord.id }}</strong><br>
+                                    <span style="font-size: 12px; color:#94a3b8;">{{ ord.order_date|date:"M d, Y H:i" }}</span>
+                                </td>
+                                <td style="padding: 15px 8px; line-height: 1.6; vertical-align: top;">
+                                    <strong>👤 Name:</strong> {{ ord.full_name }}<br>
+                                    <strong>📞 Phone:</strong> {{ ord.phone }}<br>
+                                    <strong>📍 Address:</strong> {{ ord.address }}<br>
+                                    <strong>💳 Method:</strong> {{ ord.payment_method|upper }}
+                                </td>
+                                <td style="padding: 15px 8px; font-weight: bold; color: #16a34a; vertical-align: top;">
+                                    ${{ ord.total_amount }}
+                                </td>
+                                <td style="padding: 15px 8px; vertical-align: top;">
+                                    <span style="background: #dcfce7; color: #16a34a; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: bold;">
+                                        {{ ord.status }}
+                                    </span>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <div style="text-align: center; padding: 40px 0; color: #94a3b8;">
+                    <p style="font-size: 16px; margin: 0;">No purchase transaction data logs filed yet.</p>
+                </div>
+            {% endif %}
+        </div>
+
+    </div>
+</div>
+{% endblock %}

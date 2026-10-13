@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="max-width: 1000px; margin: 0 auto; padding: 40px 20px;">
+    <h2 style="font-size: 32px; color: #1e293b; font-weight: 700; margin-bottom: 30px;">🛒 Your Shopping Cart</h2>
+
+    {% if cart_items %}
+        <div style="background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); padding: 20px;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #e2e8f0; color: #64748b; font-weight: 600;">
+                        <th style="padding: 15px 10px;">Product</th>
+                        <th style="padding: 15px 10px;">Price</th>
+                        <th style="padding: 15px 10px;">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in cart_items %}
+                        <tr style="border-bottom: 1px solid #f1f5f9; color: #334155;">
+                            <td style="padding: 15px 10px; display: flex; align-items: center; gap: 15px;">
+                                {% if item.product.image %}
+                                    <img src="{{ item.product.image.url }}" style="width: 60px; height: 60px; object-fit: cover; border-radius: 6px;">
+                                {% endif %}
+                                <span style="font-weight: 600;">{{ item.product.name }}</span>
+                            </td>
+                            <td style="padding: 15px 10px;">${{ item.product.price }}</td>
+                            <td style="padding: 15px 10px; font-weight: 600;">{{ item.quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <!-- 🌟 This specific block creates the checkout layout row with the purple button! -->
+            <div style="text-align: right; margin-top: 30px; border-top: 2px solid #e2e8f0; padding-top: 20px;">
+                <h3 style="font-size: 24px; color: #1e293b; margin-bottom: 15px;">Grand Total: <span style="color: #7c3aed;">${{ total_price }}</span></h3>
+                <a href="{% url 'checkout' %}" style="background: #7c3aed; color: white; padding: 12px 30px; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block; box-shadow: 0 4px 10px rgba(124, 58, 237, 0.3);">Proceed to Checkout ➡️</a>
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align: center; padding: 60px 20px; background: white; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <p style="color: #64748b; font-size: 18px; margin-bottom: 20px;">Your shopping cart is completely empty!</p>
+            <a href="{% url 'products' %}" style="background: #7c3aed; color: white; padding: 10px 25px; text-decoration: none; border-radius: 6px; font-weight: bold;">Shop For Products</a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
+
+
